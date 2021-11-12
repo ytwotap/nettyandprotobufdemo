@@ -1,17 +1,24 @@
-package com.yt.nettydemo.Service.main;
+package com.yt.nettydemo.service.main;
 
-import com.yt.nettydemo.Service.handler.NettyServerHandler;
+import com.yt.nettydemo.service.handler.NettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.util.CharsetUtil;
 
-
+/**
+ * @author: 杨涛
+ * @time: 2021.11.12
+ */
 public class Service {
+
+    /**
+     * 创建 BossGroup 和 WorkerGroup
+     * 1. bossGroup 只处理连接请求
+     * 2. 业务处理由 workerGroup 来完成
+     */
+    public int test;
     /**
      * 需要的依赖：
      * <dependency>
@@ -22,9 +29,6 @@ public class Service {
      */
     public static void main(String[] args) throws InterruptedException {
 
-        // 创建 BossGroup 和 WorkerGroup
-        // 1. bossGroup 只处理连接请求
-        // 2. 业务处理由 workerGroup 来完成
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 

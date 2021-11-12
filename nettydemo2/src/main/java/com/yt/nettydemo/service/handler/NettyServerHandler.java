@@ -1,4 +1,4 @@
-package com.yt.nettydemo.Service.handler;
+package com.yt.nettydemo.service.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -54,13 +54,11 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
             );
         }
 
-        /**
-         * 发生异常时执行
-         *
-         * @param ctx   上下文对象
-         * @param cause 异常对象
-         * @throws Exception
-         */
+    /**
+     * @param ctx
+     * @param cause
+     * @throws Exception
+     */
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
                 throws Exception {
