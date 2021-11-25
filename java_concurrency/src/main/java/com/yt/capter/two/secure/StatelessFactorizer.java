@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 /**
- * TODO
  *
+ *无状态 一定是线程安全的
  * @author: 杨涛
  * @date: 2021/11/15/015
  */

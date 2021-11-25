@@ -21,6 +21,10 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx)
             throws Exception {
+        //new 一个线程
+        //传送 ctx 到线程中 ，
+        //消息写入到ctx 中
+        //触发新的通信
         // 向服务器发送数据
         ctx.writeAndFlush(
                 // Unpooled 类是 Netty 提供的专门操作缓冲区的工具

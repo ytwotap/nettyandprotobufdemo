@@ -58,7 +58,7 @@ public class Client {
             // 启动客户端去连接服务器端，ChannelFuture 涉及到 Netty 的异步模型，后面展开讲
             ChannelFuture channelFuture = bootstrap.connect(
                     "127.0.0.1",
-                    8080).sync();
+                    12312).sync();
             // 对通道关闭进行监听
             channelFuture.channel().closeFuture().sync();
         } finally {

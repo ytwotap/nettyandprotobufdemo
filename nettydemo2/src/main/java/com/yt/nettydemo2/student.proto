@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+/**
+所在的package，这个package是指编译的时候生成文件的包。
+这是一个命名空间，虽然我们在后面定义了java_package，
+但是为了和非java语言中的协议相冲突，所以定义package还是非常有必要的。
+ */
+package com.yt.nettydemo2;
+
+option java_multiple_files = true;
+option java_package = "com.yt.nettydemo2.protos";
+/**
+java_outer_classname选项定义将表示此文件的包装类的类名。
+ */
+option java_outer_classname = "StudentListProtos";
+
+message Student {
+  /**
+   required 必须复制
+   */
+  required string name = 1;
+  /**
+  optional 可选赋值
+  required表示该字段是必须的，如果该字段没有值，那么该字段将会被认为是没有初始化，
+  尝试构建未初始化的消息将抛出 RuntimeException，解析未初始化的消息将抛出 IOException。
+   */
+  optional int32 id = 2;
+  optional string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+  }
+
+  message PhoneNumber {
+    optional string number = 1;
+    optional PhoneType type = 2;
+  }
+  /**
+  repeated表示该字段是可以重复的，这种重复实际上就是一种数组的结构。
+   */
+  repeated PhoneNumber phones = 4;
+}
+
+message StudentList {
+  repeated Student student = 1;
+}

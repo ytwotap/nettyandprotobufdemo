@@ -75,7 +75,7 @@ public class Service {
 
             // 绑定端口，启动服务器，生成一个 channelFuture 对象，
             // ChannelFuture 涉及到 Netty 的异步模型，后面展开讲
-            ChannelFuture channelFuture = bootstrap.bind(8080).sync();
+            ChannelFuture channelFuture = bootstrap.bind(12312).sync();
             // 对通道关闭进行监听
             channelFuture.channel().closeFuture().sync();
         } finally {
