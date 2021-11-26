@@ -1,6 +1,6 @@
 package com.yt.nettyhandler.service.router;
 
-import com.yt.nettyhandler.service.message.Message;
+import com.yt.nettyhandler.message.Message;
 import com.yt.nettyhandler.service.processer.ChatProcessor;
 
 import java.util.HashMap;

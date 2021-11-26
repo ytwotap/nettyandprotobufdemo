@@ -1,5 +1,6 @@
 package com.yt.nettyhandler.service;
 
+import com.yt.nettyhandler.service.decode.MessageDecode;
 import com.yt.nettyhandler.service.encode.MessageEncode;
 import com.yt.nettyhandler.service.handler.NettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -65,9 +66,11 @@ public class Service {
                                 protected void initChannel(
                                         SocketChannel socketChannel
                                 ) throws Exception {
-                                    socketChannel.pipeline().addLast("encode",
-                                            new MessageEncode()
+
+                                    socketChannel.pipeline().addLast( new MessageDecode(),
+                                            new MessageEncode(),  new NettyServerHandler()
                                     );
+
                                     // 可以继续调用 socketChannel.pipeline().addLast()
                                     // 添加更多 Handler
                                 }

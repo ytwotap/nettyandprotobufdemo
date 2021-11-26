@@ -1,7 +1,7 @@
 package com.yt.nettyhandler.service.comsummer;
 
-import com.yt.nettyhandler.service.message.AbstractMessage;
-import com.yt.nettyhandler.service.message.Message;
+import com.yt.nettyhandler.message.AbstractMessage;
+import com.yt.nettyhandler.message.Message;
 import com.yt.nettyhandler.service.router.CommandRouter;
 import io.netty.channel.Channel;
 

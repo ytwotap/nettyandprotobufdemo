@@ -1,9 +1,6 @@
 package com.yt.nettyhandler.service.handler.chat;
 
-import com.yt.nettyhandler.service.message.Message;
-import sun.security.jca.GetInstance;
-
-import java.nio.channels.Channel;
+import com.yt.nettyhandler.message.Message;
 
 /**
  * 聊天管理api 管理各种api的实现

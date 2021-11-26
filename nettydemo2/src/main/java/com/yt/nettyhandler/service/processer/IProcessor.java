@@ -1,6 +1,6 @@
 package com.yt.nettyhandler.service.processer;
 
-import com.yt.nettyhandler.service.message.Message;
+import com.yt.nettyhandler.message.Message;
 
 /**
  * 程序处理接口

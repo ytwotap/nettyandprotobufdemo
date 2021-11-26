@@ -1,17 +1,11 @@
 package com.yt.nettyhandler.client.handler;
 
-import com.sun.org.apache.xml.internal.security.Init;
-import com.yt.nettyhandler.client.write.WriteLister;
+import com.yt.nettyhandler.utils.KeyBoardReaderUtils;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerAppender;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 自定义一个 Handler，需要继承 Netty 规定好的某个 HandlerAdapter（规范）
@@ -19,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * InboundHandler 用于处理数据流出本端（客户端）的 IO 事件
  */
 @Slf4j
-public class NettyClientHandler extends ChannelHandlerAppender {
+public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     /**
      * 通道就绪时执行，执行这个方法，就是在tcp连接成功的时候执行了这个方法。
      * 实现启动新线程 并 进行 控制台监听。
@@ -30,27 +24,10 @@ public class NettyClientHandler extends ChannelHandlerAppender {
     public void channelActive(ChannelHandlerContext ctx)
             throws Exception {
         System.out.println("channel is connect");
-        init(ctx);
+        KeyBoardReaderUtils.init(ctx);
     }
 
-    /**
-     * 初始化调用，执行键盘监听
-     * @param ctx
-     */
-    private void init(ChannelHandlerContext ctx) {
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
-            AtomicInteger num = new AtomicInteger(0);
 
-            @Override
-            public Thread newThread(Runnable r) {
-                num.addAndGet(1);
-                log.info("new thread : {}" + num);
-                return new Thread(r, "键盘监控线程-" + num);
-            }
-        });
-        //循环执行runnable接口
-        scheduledExecutorService.scheduleAtFixedRate(new WriteLister(),10,2, TimeUnit.SECONDS);
-    }
 
     /**
      * 当通道有数据可读时执行

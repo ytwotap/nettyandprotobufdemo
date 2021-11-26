@@ -1,7 +1,6 @@
 package com.yt.nettyhandler.service.handler;
 
-import com.yt.nettyhandler.service.message.Message;
-import sun.rmi.runtime.Log;
+import com.yt.nettyhandler.message.Message;
 
 /**
  * 消息处理基类

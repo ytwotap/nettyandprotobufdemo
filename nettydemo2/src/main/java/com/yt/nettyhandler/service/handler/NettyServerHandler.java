@@ -1,5 +1,6 @@
 package com.yt.nettyhandler.service.handler;
 
+import com.yt.nettyhandler.utils.KeyBoardReaderUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,7 +13,12 @@ import io.netty.util.CharsetUtil;
      * InboundHandler 用于处理数据流出本端（服务端）的 IO 事件
      */
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
-        /**
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        KeyBoardReaderUtils.init(ctx);
+    }
+
+    /**
          * 当通道有数据可读时执行
          *
          * @param ctx 上下文对象，可以从中取得相关联的 Pipeline、Channel、客户端地址等

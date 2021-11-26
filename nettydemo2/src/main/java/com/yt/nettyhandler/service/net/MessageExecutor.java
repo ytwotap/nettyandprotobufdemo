@@ -2,13 +2,9 @@ package com.yt.nettyhandler.service.net;
 
 import com.yt.nettyhandler.service.comsummer.NetworkConsumer;
 import com.yt.nettyhandler.service.event.event.IEventListener;
-import com.yt.nettyhandler.service.message.Message;
-import com.yt.nettyhandler.service.router.CommandRouter;
+import com.yt.nettyhandler.message.Message;
 import io.netty.channel.*;
 import lombok.extern.slf4j.Slf4j;
-import sun.rmi.runtime.Log;
-
-import java.nio.channels.Channel;
 
 /**
  * 消息执行者

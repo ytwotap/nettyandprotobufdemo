@@ -1,6 +1,6 @@
 package com.yt.nettyhandler.service.comsummer;
 
-import com.yt.nettyhandler.service.message.Message;
+import com.yt.nettyhandler.message.Message;
 import io.netty.channel.Channel;
 
 

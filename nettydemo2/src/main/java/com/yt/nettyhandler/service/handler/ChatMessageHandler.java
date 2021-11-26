@@ -1,6 +1,6 @@
 package com.yt.nettyhandler.service.handler;
 
-import com.yt.nettyhandler.service.message.Message;
+import com.yt.nettyhandler.message.Message;
 
 /**
  * 聊天消息处理

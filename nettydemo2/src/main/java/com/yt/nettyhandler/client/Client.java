@@ -3,6 +3,7 @@ package com.yt.nettyhandler.client;
 import com.yt.nettyhandler.client.handler.NettyClientHandler;
 import com.yt.nettyhandler.service.decode.MessageDecode;
 import com.yt.nettyhandler.service.encode.MessageEncode;
+import com.yt.nettyhandler.service.handler.NettyServerHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -46,12 +47,9 @@ public class Client {
                                 protected void initChannel(
                                         SocketChannel socketChannel
                                 ) throws Exception {
-                                    socketChannel.pipeline().addLast("encode",
-                                            new MessageEncode()
-                                    );
-                                    //test 发送消息
-                                    socketChannel.pipeline().addLast(
-                                            new NettyClientHandler()
+
+                                    socketChannel.pipeline().addLast( new MessageDecode(),
+                                            new MessageEncode(),new NettyClientHandler()
                                     );
                                     // 可以继续调用 socketChannel.pipeline().addLast()
                                     // 添加更多 Handler
