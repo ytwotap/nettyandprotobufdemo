@@ -16,3 +16,8 @@ this project is  ``` netty + java thread  ``` implement mutex thread handler mes
 - 实现事件监听 
 
 - 实现不同线程间的通信
+
+test ByteBuf 类  - 2021年11月29日
+
+
+2021年11月29日 dec 等有时间在补充 现在先研究其他代码

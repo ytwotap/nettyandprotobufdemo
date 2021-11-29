@@ -50,21 +50,68 @@ public class ByteBufTest {
 
 
     /**
-     * 读取
+     * 读取 和 显示 index 操作index等
      */
     @Test
     public void testRead() {
-        ByteBuf directBuffer = Unpooled.directBuffer(10);
+        ByteBuf directBuffer = Unpooled.directBuffer(50);
         int i = 1;
         //写入
         while (directBuffer.isWritable()) {
             directBuffer.writeByte(i++);
         }
 
-        while (directBuffer.isReadable()) {
+        while (directBuffer.isReadable()&&directBuffer.readerIndex()<20) {
             System.out.println(directBuffer.readByte());
         }
+        log.info("操作index 前------------------------");
+        int i1 = directBuffer.readableBytes();
+        log.info("readableBytes:"+String.valueOf(i1));
+        log.info(String.valueOf("readerIndex:"+directBuffer.readerIndex()));
+        //清楚读取的
+        log.info("清除reader index...");
+        directBuffer.discardReadBytes();
+
+        log.info("操作index后 ------------------------");
+        log.info("readableBytes:"+String.valueOf(directBuffer.readableBytes()));
+        log.info(String.valueOf("readerIndex:"+directBuffer.readerIndex()));
+
+        log.info("执行 clear ------------------------");
+        directBuffer.clear();
+        log.info("readableBytes:"+String.valueOf(directBuffer.readableBytes()));
+        log.info(String.valueOf("readerIndex:"+directBuffer.readerIndex()));
+
     }
 
+
+    @Test
+    public void testGetAndSet() {
+        ByteBuf directBuffer = Unpooled.directBuffer();
+        soutLog(directBuffer,"before");
+        directBuffer.setByte(1,11);
+        soutLog(directBuffer," setByte");
+        directBuffer.writeByte(11);
+        directBuffer.writeByte(22);
+        soutLog(directBuffer,"writeByte");
+        directBuffer.writeByte(22);
+        //只能设置 writeIndex - read index 中间已有未读的字符串
+        directBuffer.setByte(directBuffer.readerIndex(),55);
+        soutLog(directBuffer,"writeByte");
+
+    }
+
+    /**
+     * 输出相应的操作
+     * @param directBuffer
+     * @param operateString
+     */
+    public void soutLog(ByteBuf directBuffer,String operateString) {
+        log.info("执行--{} ...",operateString);
+        log.info("readableBytes:"+String.valueOf(directBuffer.readableBytes()));
+        log.info(String.valueOf("readerIndex:"+directBuffer.readerIndex()));
+        while (directBuffer.isReadable()) {
+            log.info(String.valueOf(directBuffer.readByte()));
+        }
+    }
 
 }
