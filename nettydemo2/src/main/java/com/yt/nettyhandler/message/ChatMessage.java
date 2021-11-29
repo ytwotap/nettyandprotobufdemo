@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 /**
  * 对ChatMessage 解码
+ *
  * @author: 杨涛
  * @date: 2021/11/25/025
  */
@@ -19,36 +20,38 @@ import java.util.Arrays;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChatMessage extends AbstractMessage{
-    private Person chat;
+public class ChatMessage extends AbstractMessage {
+    private Person proto;
 
     /**
      * 返回消息定义的枚举常量值得id
+     *
      * @return
      */
     @Override
-    public  int getId() {
-        return MessageId.chatId.ordinal();
+    public int getId() {
+        return MessageId.chatId.getId();
     }
 
     @Override
-    public byte[] encode(Object o) {
-        if (o instanceof Person) {
-            Person person = (Person) o;
-            return person.toByteArray();
-        } else {
-            log.error("not decode Person Message:【{}】",o.getClass().getName());
-            //todo 不能编码如何处理；
-            return null;
-        }
+    public byte[] encode() {
+        return this.proto.toByteArray();
     }
 
+
+
+    /**
+     * 编码
+     *
+     * @param var1
+     * @return
+     */
     @Override
     public Object decode(byte[] var1) {
         try {
-            return Person.parseFrom(var1);
+            this.proto = Person.parseFrom(var1);
         } catch (InvalidProtocolBufferException e) {
-            log.info("decode message--parseClass:【{}】 is error,exception:【{}】",this.getClass().getName(), Arrays.toString(e.getStackTrace()));
+            log.info("decode message--parseClass:【{}】 is error,exception:【{}】", this.getClass().getName(), Arrays.toString(e.getStackTrace()));
         }
         return var1;
     }

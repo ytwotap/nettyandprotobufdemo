@@ -26,12 +26,14 @@ public class MessageEncode extends MessageToByteEncoder<Message> {
     protected void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {
         try {
             //todo 编码
-            Message message = MessagePool.getMessage(0);
+            Message message = MessagePool.getMessage(msg.getId());
             //获取byty 数组
-            byte[] encode = message.encode(msg);
+            byte[] encode = message.encode();
             //加入到context中
             out = Unpooled.wrappedBuffer(encode);
-            log.info("encode message:【{}】->编码后：【{}】 ", msg, out);
+            System.out.println(msg.getId());
+//            out.setInt(0, msg.getId());
+            log.info("encode message:【{}】->编码后：【{}】 ", msg, out.toString());
         } catch (Exception e) {
             log.info("encode is erro for: 【{}】",msg);
         }

@@ -26,7 +26,7 @@ public interface Message {
      * @return
      */
 
-    public byte[] encode(Object O);
+    public byte[] encode();
 
     /**
      * 解码

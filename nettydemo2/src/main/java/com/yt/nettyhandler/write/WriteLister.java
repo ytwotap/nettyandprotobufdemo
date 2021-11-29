@@ -39,17 +39,17 @@ public class WriteLister  implements Runnable{
                 msg = br.readLine();
                 Person.Builder person = Person.newBuilder().setName("client").setMessage(msg).setUuid(111);
                 //写入到channel中，
-//                context.writeAndFlush(
-//                        // Unpooled 类是 Netty 提供的专门操作缓冲区的工具
-//                        // 类，copiedBuffer 方法返回的 ByteBuf 对象类似于
-//                        // NIO 中的 ByteBuffer，但性能更高
-//                        Unpooled.copiedBuffer(
-//                                person.build().toString(),
-//                                CharsetUtil.UTF_8
-//                        ));
+                context.writeAndFlush(
+                        // Unpooled 类是 Netty 提供的专门操作缓冲区的工具
+                        // 类，copiedBuffer 方法返回的 ByteBuf 对象类似于
+                        // NIO 中的 ByteBuffer，但性能更高
+                        Unpooled.copiedBuffer(
+                                person.build().toString(),
+                                CharsetUtil.UTF_8
+                        ));
                 Person build = person.build();
                 ChatMessage chatMessage = new ChatMessage();
-                chatMessage.setChat(build);
+                chatMessage.setProto(build);
                 context.writeAndFlush(chatMessage);
             }
 

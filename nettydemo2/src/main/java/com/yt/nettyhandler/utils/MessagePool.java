@@ -2,6 +2,7 @@ package com.yt.nettyhandler.utils;
 
 import com.yt.nettyhandler.message.ChatMessage;
 import com.yt.nettyhandler.message.Message;
+import com.yt.nettyhandler.proto.Person;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +26,7 @@ public class MessagePool {
      */
     private static void init() {
         ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setProto(Person.newBuilder().build());
         register(chatMessage);
     }
 
