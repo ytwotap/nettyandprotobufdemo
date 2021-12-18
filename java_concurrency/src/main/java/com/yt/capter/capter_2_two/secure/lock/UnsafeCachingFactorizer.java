@@ -1,4 +1,4 @@
-package com.yt.capter.two.secure.lock;
+package com.yt.capter.capter_2_two.secure.lock;
 
 import com.yt.capter.tool.UnThreadSafe;
 
@@ -10,12 +10,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  *
- *两个原子操作 在多线程中 容易出现 两者操作 前后不一致 使用synchronized 保证线程安全性
+ *两个原子操作 在多线程中 容易出现 两者操作 前后不一致
  * @author: 杨涛
  * @date: 2021/11/15/015
  */
 @UnThreadSafe
-public class SafeCachingFactorizer implements Servlet {
+public class UnsafeCachingFactorizer implements Servlet {
     private final AtomicReference<BigInteger> lastNumber
             = new AtomicReference<BigInteger>();
     private final AtomicReference<BigInteger[]> lastFactors
@@ -35,14 +35,13 @@ public class SafeCachingFactorizer implements Servlet {
     /**
      * 缓存操作 根据 从缓存数组中拿到以前缓存的数据 如果 有 就 使用  缓存结果
      * 没有 就进行计算 之后 缓存
-     * 使用互斥锁保证线程安全性
      * @param servletRequest
      * @param servletResponse
      * @throws ServletException
      * @throws IOException
      */
     @Override
-    public synchronized void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
         BigInteger i = extractFromRequest(servletRequest);
         //判断是否有缓存
         if (Objects.equals(i, lastNumber)) {
