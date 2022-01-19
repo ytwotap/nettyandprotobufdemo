@@ -4,7 +4,8 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 /**
- * vector 可能产生 数组越界异常 ArrayIndexOutOfBoundsException
+ *  不适用同步容器
+ *  vector 可能产生 数组越界异常 ArrayIndexOutOfBoundsException
  * 需要使用同步器去同步Vector
  * @author: YT
  * @date: 2022/1/18/018
