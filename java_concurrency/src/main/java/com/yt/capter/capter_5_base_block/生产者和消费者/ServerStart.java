@@ -8,6 +8,6 @@ import java.io.File;
  */
 public class ServerStart {
     public static void main(String[] args) {
-        FileManager.startIndexing(new File("F:\\test"));
+        FileManager.startIndexing(new File("C:\\"));
     }
 }

@@ -13,8 +13,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @date: 2022/1/19/019
  */
 public class FileManager {
-    private static int producer = 2;
-    private static int comsumer = 5;
+    private static int producer = 5;
+    private static int comsumer = 7;
     public static void startIndexing(File root) {
         BlockingQueue<File> queue = new LinkedBlockingQueue<>();
         FileFilter fileFilter = new FileFilter() {
