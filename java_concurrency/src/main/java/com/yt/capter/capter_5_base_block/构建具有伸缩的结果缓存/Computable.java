@@ -113,9 +113,9 @@ class Memoizerl2<A, V> implements Computable<A, V> {
  */
 class Memoizerl3<A, V> implements Computable<A, V> {
     private final Map<A, Future<V>> cache = new ConcurrentHashMap<>();
-    private final Computable<A, Future<V>> C;
+    private final Computable<A, V> C;
 
-    Memoizerl3(Computable<A, Future<V>> c) {
+    Memoizerl3(Computable<A, V> c) {
         C = c;
     }
 
@@ -135,7 +135,7 @@ class Memoizerl3<A, V> implements Computable<A, V> {
             Callable<V> eval = new Callable<V>() {
                 @Override
                 public V call() throws Exception {
-                    return (V) C.compute(arg);
+                    return  C.compute(arg);
                 }
             };
 
@@ -164,6 +164,8 @@ class Test {
                 int i = 0;
                 while (i < 500) {
                     integers.add(i);
+                    integers.add(1);
+
                     i++;
                 }
                 test(m1, executorService, integers);
@@ -180,6 +182,8 @@ class Test {
                 int i = 0;
                 while (i < 500) {
                     integers.add(i);
+                    integers.add(1);
+
                     i++;
                 }
                 ExecutorService executorService = Executors.newCachedThreadPool();
@@ -191,16 +195,16 @@ class Test {
         });
 
 
-
-        //futureTask 运行 
+        //futureTask 运行
         TimeUtils.operatorTime(new Operator() {
             @Override
             public boolean active() throws InterruptedException {
-                Memoizerl2<Integer, BigInteger> m1 = new Memoizerl2<>(new ExpensiveFunction());
+                Memoizerl3<Integer, BigInteger> m1 = new Memoizerl3<>(new ExpensiveFunction());
                 CopyOnWriteArrayList<Integer> integers = new CopyOnWriteArrayList<>();
                 int i = 0;
                 while (i < 500) {
                     integers.add(i);
+                    integers.add(1);
                     i++;
                 }
                 ExecutorService executorService = Executors.newCachedThreadPool();
@@ -210,6 +214,11 @@ class Test {
                 return true;
             }
         });
+
+
+
+        //futureTask 运行
+
 
 //        TimeUtils.operatorTime(new Operator() {
 //            @Override
