@@ -1,8 +1,8 @@
-package com.alany.spider.core.proxy;
+package com.example.spider.core.proxy;
 
-import com.alany.spider.bean.HttpProxy;
-import com.alany.spider.common.SpringContext;
-import com.alany.spider.core.http.UserAgentService;
+import com.example.spider.bean.HttpProxy;
+import com.example.spider.common.SpringContext;
+import com.example.spider.core.http.UserAgentService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

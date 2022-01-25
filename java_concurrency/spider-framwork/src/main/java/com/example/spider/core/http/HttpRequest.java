@@ -1,8 +1,8 @@
-package com.alany.spider.core.http;
+package com.example.spider.core.http;
 
-import com.alany.spider.bean.HttpResult;
-import com.alany.spider.common.SpringContext;
-import com.alany.spider.core.proxy.ProxyFetchFactory;
+import com.example.spider.bean.HttpResult;
+import com.example.spider.common.SpringContext;
+import com.example.spider.core.proxy.ProxyFetchFactory;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;

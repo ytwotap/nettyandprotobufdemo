@@ -1,12 +1,13 @@
-package com.alany.spider.core.process;
+package com.example.spider.core.process;
 
-import com.alany.spider.bean.ExecuteContent;
-import com.alany.spider.bean.HttpResult;
-import com.alany.spider.common.SpringContext;
-import com.alany.spider.core.http.UserAgentService;
+import com.example.spider.bean.ExecuteContent;
+import com.example.spider.bean.HttpResult;
+import com.example.spider.common.SpringContext;
+import com.example.spider.core.http.UserAgentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DuplicateKeyException;
+import org.yaml.snakeyaml.constructor.DuplicateKeyException;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

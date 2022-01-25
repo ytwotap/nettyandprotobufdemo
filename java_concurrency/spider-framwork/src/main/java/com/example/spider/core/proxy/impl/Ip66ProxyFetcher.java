@@ -1,8 +1,8 @@
-package com.alany.spider.core.proxy.impl;
+package com.example.spider.core.proxy.impl;
 
 
-import com.alany.spider.bean.HttpProxy;
-import com.alany.spider.core.proxy.AbstractProxyFetcher;
+import com.example.spider.bean.HttpProxy;
+import com.example.spider.core.proxy.AbstractProxyFetcher;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;

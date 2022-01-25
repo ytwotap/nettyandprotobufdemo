@@ -1,4 +1,4 @@
-package com.alany.spider.core.http;
+package com.example.spider.core.http;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.alany.spider.core.cache;
+package com.example.spider.core.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;

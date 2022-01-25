@@ -1,9 +1,9 @@
-package com.alany.spider.core.proxy;
+package com.example.spider.core.proxy;
 
-import com.alany.spider.bean.HttpProxy;
-import com.alany.spider.common.SpringContext;
-import com.alany.spider.core.cache.CacheService;
-import com.alany.spider.utils.StringUtils;
+import com.example.spider.bean.HttpProxy;
+import com.example.spider.common.SpringContext;
+import com.example.spider.core.cache.CacheService;
+import com.example.spider.utils.StringUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
 import org.slf4j.Logger;
@@ -80,6 +80,7 @@ public class ProxyFetchFactory {
         boolean isValid = false;
         ExecutorService executor = Executors.newSingleThreadExecutor();
         FutureTask<String> future = new FutureTask<String>(new Callable<String>() {//使用Callable接口作为构造参数
+            @Override
             public String call() {
                 //搜索任务异步处理
                 return request(httpProxy);
