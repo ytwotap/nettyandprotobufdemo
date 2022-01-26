@@ -66,7 +66,7 @@ public class ProxyFetchFactory {
             }
             if (proxies != null && !proxies.isEmpty()) {
                 //多线程执行检查相关的值
-                ExecutorService es = Executors.newFixedThreadPool(10);
+                ExecutorService es = Executors.newCachedThreadPool();
                 for (final HttpProxy proxy : proxies) {
 
 //                    futures.add((Future<HttpProxy>) es.submit(new Runnable() {
@@ -81,10 +81,11 @@ public class ProxyFetchFactory {
                     );
                     futures.add(submit);
                 }
-                //强制关闭 todo 为啥要强制关闭？？
+                //强制关闭  todo 为啥要强制关闭？？ 能不能在给定时间后在关闭？？  应该是防止阻塞
                 es.shutdown();
                 for (Future<HttpProxy> future : futures) {
                     try {
+                        //对异常结果进行处理 如果没有处理异常
                         future.get();
                     } catch (Exception e) {
                         e.printStackTrace();

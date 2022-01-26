@@ -27,8 +27,12 @@ public class UserAgentService {
     @PostConstruct
     public void init() {
         List<String> list = new ArrayList<>();
-        InputStream resourceAsStream = this.getClass().getResourceAsStream("userAgents.txt");
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("userAgents.txt");
         try {
+            if (Objects.isNull(resourceAsStream)) {
+                log.error("init user agent is erro and please you exit userAgents.text file");
+                return;
+            }
             list = IOUtils.readLines(resourceAsStream, "UTF-8");
             if (!list.isEmpty()) {
                 //去重处理

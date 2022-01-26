@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by alany on 2019/7/26.
@@ -35,7 +38,8 @@ public class GithubProxyFetcher extends AbstractProxyFetcher {
 
     @Override
     public List<HttpProxy> fetchProxy() {
-        List<HttpProxy> list = new ArrayList<>();
+        //todo 这个可以优化 使用多线程获取代理
+        List<HttpProxy> list = new CopyOnWriteArrayList<>();
         Map<String, Object> headers = new HashMap<>();
         headers.put("User-Agent", getRandomUserAgent());
         HttpResult result = httpRequest.setUrl(PROXY_LIST_URL).setHeaders(headers).doGet();
@@ -43,34 +47,43 @@ public class GithubProxyFetcher extends AbstractProxyFetcher {
             return list;
         }
         String[] lines = result.getContent().split("\\n");
+        //多线程执行
+        ExecutorService executor = Executors.newCachedThreadPool();
         if (lines != null && lines.length > 0) {
+            //多线程执行调用处理请求
             for (String line : lines) {
-                try {
-                    JSONObject json = JSON.parseObject(line);
-                    int port = json.getInteger("port");
-                    String type = json.getString("type");
-                    JSONArray addrArray = json.getJSONArray("export_address");
-                    if (addrArray == null || addrArray.size() < 1) {
-                        continue;
-                    }
-                    for (int i = 0; i < addrArray.size(); i++) {
-                        String address = addrArray.getString(i);
-                        if (StringUtils.isBlank(address) || "unknown".equalsIgnoreCase(address)) {
-                            continue;
-                        }
-                        HttpProxy httpProxy = new HttpProxy(address, port);
-                        if (StringUtils.isNotBlank(type)) {
-                            httpProxy.setType(type.toLowerCase());
-                        }
-                        httpProxy.setProvider(getBusiness());
-                        list.add(httpProxy);
-                    }
-                } catch (Exception e) {
-                    LOGGER.error("fetch proxy meet error: ", e);
-                }
+            executor.submit(()->{
+                extracted(list, line);
+            });
             }
         }
         LOGGER.info("fetch [" + getBusiness() + "] proxy list size=" + list.size());
         return list;
+    }
+
+    private void extracted(List<HttpProxy> list, String line) {
+        try {
+            JSONObject json = JSON.parseObject(line);
+            int port = json.getInteger("port");
+            String type = json.getString("type");
+            JSONArray addrArray = json.getJSONArray("export_address");
+            if (addrArray == null || addrArray.size() < 1) {
+                return;
+            }
+            for (int i = 0; i < addrArray.size(); i++) {
+                String address = addrArray.getString(i);
+                if (StringUtils.isBlank(address) || "unknown".equalsIgnoreCase(address)) {
+                    continue;
+                }
+                HttpProxy httpProxy = new HttpProxy(address, port);
+                if (StringUtils.isNotBlank(type)) {
+                    httpProxy.setType(type.toLowerCase());
+                }
+                httpProxy.setProvider(getBusiness());
+                list.add(httpProxy);
+            }
+        } catch (Exception e) {
+            LOGGER.error("fetch proxy meet error: ", e);
+        }
     }
 }

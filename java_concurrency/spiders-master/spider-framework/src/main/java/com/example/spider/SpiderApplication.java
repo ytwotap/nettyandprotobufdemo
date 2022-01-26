@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = {"com.alany.spider"}) //扫描该包路径下的所有spring组件
+@ComponentScan(basePackages = {"com.example.spider"}) //扫描该包路径下的所有spring组件
 @SpringBootApplication
 public class SpiderApplication {
 
