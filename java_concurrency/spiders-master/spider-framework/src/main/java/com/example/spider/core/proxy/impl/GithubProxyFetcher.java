@@ -42,6 +42,7 @@ public class GithubProxyFetcher extends AbstractProxyFetcher {
         List<HttpProxy> list = new CopyOnWriteArrayList<>();
         Map<String, Object> headers = new HashMap<>();
         headers.put("User-Agent", getRandomUserAgent());
+        LOGGER.info("request doGet()");
         HttpResult result = httpRequest.setUrl(PROXY_LIST_URL).setHeaders(headers).doGet();
         if (result == null || StringUtils.isBlank(result.getContent())) {
             return list;
@@ -51,6 +52,7 @@ public class GithubProxyFetcher extends AbstractProxyFetcher {
         ExecutorService executor = Executors.newCachedThreadPool();
         if (lines != null && lines.length > 0) {
             //多线程执行调用处理请求
+            //todo change this thread .
             for (String line : lines) {
             executor.submit(()->{
                 extracted(list, line);
