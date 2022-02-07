@@ -18,5 +18,4 @@ public class SpiderApplication {
 		Thread.sleep(1000 * 30);
 		asyncProcessTask.startProcessorsByBusiness(BizEnum.tabobao.getName());
 	}
-
 }
